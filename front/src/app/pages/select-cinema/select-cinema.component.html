@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>Choisissez un cinéma :</h1>
+
+    <div *ngFor="let cinema of cinemas" class="btn-select">
+        <button class="btn btn-primary" (click)="goToAccueilCinema(cinema)">{{cinema.nom}}</button>
+    </div>
+</div>
+
+
