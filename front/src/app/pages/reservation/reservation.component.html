@@ -1,5 +1,5 @@
-<div *ngIf="ticket">
-    <h1>Merci pour votre commande !</h1>
-    <h5>Numéro de commande : {{ticket._id}}</h5>
-    <button class="btn btn-primary" (click)="generateTicket()">Imprimer mon ticket :</button>
+<div *ngIf="ticket" class="container">
+    <h1 class="title">Merci pour votre commande !</h1>
+    <h5 class="title">Numéro de commande : {{ticket._id}}</h5>
+    <button class="btn btn-warning" (click)="generateTicket()">Imprimer mon ticket :</button>
 </div>

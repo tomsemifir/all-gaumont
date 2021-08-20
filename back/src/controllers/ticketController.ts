@@ -28,8 +28,8 @@ class TicketController {
         let texte = "Commande : " + ticket._id + "\n" +
         "Cinema : " + ticket.seance.cinema.nom + "\n" +
         "Film : " + ticket.seance.film.nom + "\n" + 
-        "Date début : " + ticket.seance.date + "\n" +
-        "Date fin : " + (new Date(ticket.seance.date.getTime() + (<number>ticket.seance.film.duree*60000))) + "\n" +
+        "Date début : " + ticket.seance.date.toLocaleString() + "\n" +
+        "Date fin : " + (new Date(ticket.seance.date.getTime() + (<number>ticket.seance.film.duree*60000)).toLocaleString()) + "\n" +
         "Salle : " + ticket.seance.numeroSalle
 
         res.status(200)

@@ -1,5 +1,9 @@
 .container {
     display: flex;
-    flex-wrap : wrap;
-    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.element {
+    width: 21%;
+    margin: 2%;
 }
