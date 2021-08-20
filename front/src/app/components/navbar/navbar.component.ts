@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cinema } from 'src/app/models/cinema';
 
 @Component({
@@ -8,12 +9,18 @@ import { Cinema } from 'src/app/models/cinema';
 })
 export class NavbarComponent implements OnInit {
 
-  cinema : Cinema;
-
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
-    this.cinema = JSON.parse(localStorage.getItem("selectedCinema"));
+  }
+
+  redirect = () => {
+    let selectedCinema = JSON.parse(localStorage.getItem("selectedCinema"));
+    if(selectedCinema != null) {
+      this.router.navigateByUrl(`/cinema/${selectedCinema._id}/films`)
+    } else {
+      this.router.navigateByUrl("")
+    }
   }
 
 }
