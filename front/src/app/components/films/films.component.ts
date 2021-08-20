@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cinema } from 'src/app/models/cinema';
 import { Film } from 'src/app/models/film';
+import { CinemaService } from 'src/app/services/cinema.service';
 import { FilmService } from 'src/app/services/film.service';
 
 @Component({
@@ -10,18 +12,42 @@ import { FilmService } from 'src/app/services/film.service';
 })
 export class FilmsComponent implements OnInit {
 
-  public films : Film[] = [];
+  films : Film[] = [];
+  cinemas : Cinema[] = [];
+  selectedCinema : Cinema;
 
-  constructor(private service : FilmService) { }
+  constructor(
+    private filmService : FilmService,
+    private cinemaService : CinemaService,
+    private router : Router
+    ) { }
 
   ngOnInit(): void {
     //Récupérer le JSON du cinema enregistré
-    let cinemaJson : any = localStorage.getItem("selectedCinema")
+    this.selectedCinema = JSON.parse(localStorage.getItem("selectedCinema"));
     //Transformer le JSON du cinema enregistré en Cinema
-    let cinema : Cinema = JSON.parse(cinemaJson);
 
-    this.service.findDistincByCinemaId(cinema._id).subscribe(data => {
+    this.initFilmList();
+
+    this.initCinemaList();
+  }
+
+  changeSelectedCinema = (cinema : Cinema) => {
+    this.selectedCinema = cinema;
+    localStorage.setItem("selectedCinema", JSON.stringify(cinema));
+    this.router.navigateByUrl(`cinema/${cinema._id}/films`);
+    this.initFilmList();
+  }
+
+  initFilmList = () => {
+    this.filmService.findDistincByCinemaId(this.selectedCinema._id).subscribe(data => {
       this.films = data;
+    })
+  }
+
+  initCinemaList = () => {
+    this.cinemaService.findAll().subscribe(data => {
+      this.cinemas = data;
     })
   }
 
