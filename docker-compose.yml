@@ -16,13 +16,11 @@ services:
     container_name: front
     ports:
       - 80:80
-      
   back:
     build: ./back/.
     container_name: back
     environment:
       - PORT=80
     ports:
-      - 8080:80 
-
+      - 8080:80
 
