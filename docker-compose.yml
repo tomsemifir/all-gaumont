@@ -1,0 +1,28 @@
+version: '3'
+
+volumes: 
+  mongo:
+
+services:
+  db: 
+    image: mongo
+    ports: 
+      - 27017:27017
+    container_name: db 
+    volumes: 
+      - mongo:/data/db
+  front:
+    build: ./front/.
+    container_name: front
+    ports:
+      - 80:80
+      
+  back:
+    build: ./back/.
+    container_name: back
+    environment:
+      - PORT=80
+    ports:
+      - 8080:80 
+
+
